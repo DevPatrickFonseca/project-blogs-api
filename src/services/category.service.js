@@ -1,5 +1,18 @@
 const { Category } = require('../models');
 
+const getCategories = async () => {
+  const allCategories = await Category.findAll();
+
+  if (!allCategories) {
+    return { 
+      type: 500, 
+      data: { message: 'No registered categories' }, 
+    };
+  }
+  
+  return { type: 200, data: allCategories };
+};
+
 const postCategory = async ({ name }) => {
   const category = await Category.findOne({
     attributes: ['id', 'name'],
@@ -20,4 +33,5 @@ const postCategory = async ({ name }) => {
 
 module.exports = {
   postCategory,
+  getCategories,
 };
