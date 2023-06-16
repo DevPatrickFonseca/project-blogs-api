@@ -11,8 +11,9 @@ app.get('/', (_request, response) => {
 
 app.use(express.json());
 
-app.use('/login', loginRouter);
 app.use('/user', userRouter);
+
+app.use('/login', loginRouter);
 
 app.use((err, _req, res, _next) => {
   res.status(err.status || 500).json({ message: err.message });
