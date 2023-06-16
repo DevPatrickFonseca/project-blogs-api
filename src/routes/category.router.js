@@ -7,6 +7,8 @@ const { tokenValidator } = require('../middlewares/tokenValidator');
 
 const { categoryValidator } = require('../middlewares/categoryValidator');
 
+routers.get('/', tokenValidator, categoryController.getCategoriesController);
+
 routers.post('/', tokenValidator, categoryValidator, categoryController.createCategoryController);
 
 module.exports = routers;
