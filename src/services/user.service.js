@@ -1,6 +1,21 @@
 const { User } = require('../models');
 const { createToken } = require('../utils/JWTGenerator');
 
+const getUsers = async () => {
+  const allUsers = await User.findAll({
+    attributes: { exclude: ['password'] },
+  });
+
+  if (!allUsers) {
+    return { 
+      type: 500, 
+      data: { message: 'No registered users' }, 
+    };
+  }
+  
+  return { type: 200, data: allUsers };
+};
+
 const postUser = async ({ displayName, email, password, image }) => {
   const user = await User.findOne({
     attributes: ['id', 'displayName', 'email', 'image'],
@@ -28,4 +43,5 @@ const postUser = async ({ displayName, email, password, image }) => {
 
 module.exports = {
   postUser,
+  getUsers,
 };
