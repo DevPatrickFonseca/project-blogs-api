@@ -7,6 +7,14 @@ const getUsersController = async (req, res) => {
   return res.status(type).json(data);
 };
 
+const getUserByIdController = async (req, res) => {
+  const { id } = req.params;
+  const { type, data } = await userService
+    .getUserById(Number(id));
+
+  return res.status(type).json(data);
+};
+
 const createUserController = async (req, res) => {
   const { displayName, email, password, image } = req.body;
   const { type, data } = await userService
@@ -18,4 +26,5 @@ const createUserController = async (req, res) => {
 module.exports = {
   createUserController,
   getUsersController,
+  getUserByIdController,
 };
