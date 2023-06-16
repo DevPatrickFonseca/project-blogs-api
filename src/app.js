@@ -1,5 +1,5 @@
 const express = require('express');
-const { loginRouter, userRouter } = require('./routes');
+const { loginRouter, userRouter, categoryRouter } = require('./routes');
 
 const app = express();
 require('express-async-errors');
@@ -12,6 +12,7 @@ app.get('/', (_request, response) => {
 app.use(express.json());
 
 app.use('/user', userRouter);
+app.use('/categories', categoryRouter);
 
 app.use('/login', loginRouter);
 
