@@ -16,6 +16,22 @@ const getUsers = async () => {
   return { type: 200, data: allUsers };
 };
 
+const getUserById = async (id) => {
+  const userId = await User.findOne({
+    attributes: { exclude: ['password'] },
+    where: { id },
+  });
+
+  if (!userId) {
+    return { 
+      type: 404, 
+      data: { message: 'User does not exist' }, 
+    };
+  }
+  
+  return { type: 200, data: userId };
+};
+
 const postUser = async ({ displayName, email, password, image }) => {
   const user = await User.findOne({
     attributes: ['id', 'displayName', 'email', 'image'],
@@ -44,4 +60,5 @@ const postUser = async ({ displayName, email, password, image }) => {
 module.exports = {
   postUser,
   getUsers,
+  getUserById,
 };
