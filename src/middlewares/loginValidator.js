@@ -25,14 +25,6 @@ const passwordValidator = (req, res, next) => {
     );
   }
 
-  // if (password.length < 6) {
-  //   return res.status(HTTP_ERROR_BAD_REQUEST).json(
-  //     {
-  //       message: '"password" length must be at least 6 characters long',
-  //     },
-  //   );
-  // }
-
   next();
 };
 

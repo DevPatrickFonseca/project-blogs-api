@@ -1,7 +1,7 @@
 const { User } = require('../models');
 const { createToken } = require('../utils/JWTGenerator');
 
-const loginAuthorization = async ({ email, password }) => {
+const loginAuthorizationService = async ({ email, password }) => {
   const user = await User.findOne({
     attributes: ['id', 'displayName', 'email', 'image'],
     where: { email, password },
@@ -16,6 +16,7 @@ const loginAuthorization = async ({ email, password }) => {
 
   const payload = {
     id: user.id,
+    displayName: user.displayName,
   };
   
   const token = createToken(payload);
@@ -24,7 +25,7 @@ const loginAuthorization = async ({ email, password }) => {
 };
 
 module.exports = {
-  loginAuthorization,
+  loginAuthorizationService,
 };
 
 // Reference: 

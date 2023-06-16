@@ -2,10 +2,18 @@ const express = require('express');
 
 const { loginController } = require('../controllers');
 
-const { emailValidator, passwordValidator } = require('../middlewares/loginValidator');
+const { 
+  emailValidator, 
+  passwordValidator, 
+} = require('../middlewares/loginValidator');
 
 const routers = express.Router();
 
-routers.post('/', emailValidator, passwordValidator, loginController.login);
+routers.post(
+'/', 
+emailValidator, 
+passwordValidator, 
+loginController.loginAuthorizationController,
+);
 
 module.exports = routers;
