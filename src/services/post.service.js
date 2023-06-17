@@ -1,4 +1,4 @@
-const { BlogPost, User, Category } = require('../models');
+const { BlogPost, User, Category, PostCategory } = require('../models');
 
 const getPosts = async () => {
   const allPosts = await BlogPost.findAll({
@@ -36,7 +36,33 @@ const getPostById = async (id) => {
   return { type: 200, data: postId };
 };
 
+const hasCategory = async (categoryIds) => {
+  const categoryPost = await Category.findAll({ where: { id: categoryIds } });
+  
+  return categoryPost.length === categoryIds.length;
+};
+
+const postPost = async ({ title, content, userId, categoryIds }) => {
+  if (!(await hasCategory(categoryIds))) {
+    return { 
+      type: 400, data: { message: 'one or more "categoryIds" not found' }, 
+    };
+  }
+
+  const newPost = await BlogPost.create({ title, content, userId });
+
+  await PostCategory
+  .bulkCreate(categoryIds.map((categoryId) => ({ categoryId, postId: newPost.id })));
+
+  return { type: 201, data: newPost };
+};
+
 module.exports = {
   getPosts,
   getPostById,
+  postPost,
 };
+
+// Requirement completed with the help of Allex Thiago Santos Rosa
+// https://github.com/AllexThiagoSR
+// https://www.linkedin.com/in/allexthiagosantosrosa
