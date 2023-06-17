@@ -14,7 +14,7 @@ const tokenValidator = (req, res, next) => {
   try {
     const tokenDecoded = jwt.decodeToken(token);
 
-    req.user = tokenDecoded.user;
+    req.user = tokenDecoded;
     
     next();
   } catch (err) {

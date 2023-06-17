@@ -31,10 +31,12 @@ module.exports = {
       published: {
         type: Sequelize.DATE,
         allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updated: {
         type: Sequelize.DATE,
         allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP')
       },
     });
   },
