@@ -7,5 +7,6 @@ const { postController } = require('../controllers');
 const { tokenValidator } = require('../middlewares/tokenValidator');
 
 routers.get('/', tokenValidator, postController.getPostController);
+routers.get('/:id', tokenValidator, postController.gePostByIdController);
 
 module.exports = routers;
