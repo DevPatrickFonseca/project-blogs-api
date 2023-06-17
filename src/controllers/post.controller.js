@@ -7,7 +7,7 @@ const getPostController = async (req, res) => {
   return res.status(type).json(data);
 };
 
-const gePostByIdController = async (req, res) => {
+const getPostByIdController = async (req, res) => {
   const { id } = req.params;
   const { type, data } = await postService
     .getPostById(Number(id));
@@ -17,5 +17,5 @@ const gePostByIdController = async (req, res) => {
 
 module.exports = {
   getPostController,
-  gePostByIdController,
+  getPostByIdController,
 };
