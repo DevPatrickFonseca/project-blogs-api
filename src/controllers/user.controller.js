@@ -23,8 +23,17 @@ const createUserController = async (req, res) => {
   return res.status(type).json(data);
 };
 
+const deleteUserController = async (req, res) => {
+  const { id } = req.user;
+  const { type, data } = await userService
+    .deleteUser(id);
+
+  return res.status(type).json(data);
+};
+
 module.exports = {
   createUserController,
   getUsersController,
   getUserByIdController,
+  deleteUserController,
 };
