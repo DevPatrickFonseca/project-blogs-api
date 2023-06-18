@@ -4,7 +4,7 @@ const routers = express.Router();
 
 const { userController } = require('../controllers');
 
-const { tokenValidator } = require('../middlewares/tokenValidator');
+const { tokenValidator } = require('../middlewares');
 const { 
   userValidator,
   displayUserNameValidator,
@@ -23,5 +23,7 @@ routers.post(
   passwordUserValidator,
   userController.createUserController,
 );
+
+routers.delete('/me', tokenValidator, userController.deleteUserController);
 
 module.exports = routers;
