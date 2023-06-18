@@ -22,7 +22,7 @@ const userValidator = async (req, res, next) => {
   next();
 };
 
-const displayNameValidator = (req, res, next) => {
+const displayUserNameValidator = (req, res, next) => {
   const { displayName } = req.body;
 
   if (displayName.length < 8) {
@@ -36,7 +36,7 @@ const displayNameValidator = (req, res, next) => {
   next();
 };
 
-const emailValidator = (req, res, next) => {
+const emailUserValidator = (req, res, next) => {
   const { email } = req.body;
   const regex = /\S+@\S+\.\S+/;
   const emailPattern = regex.test(email);
@@ -60,7 +60,7 @@ const emailValidator = (req, res, next) => {
   next();
 };
 
-const passwordValidator = (req, res, next) => {
+const passwordUserValidator = (req, res, next) => {
   const { password } = req.body;
 
   if (password.length < 6) {
@@ -76,7 +76,7 @@ const passwordValidator = (req, res, next) => {
 
 module.exports = {
   userValidator,
-  displayNameValidator,
-  emailValidator,
-  passwordValidator,
+  displayUserNameValidator,
+  emailUserValidator,
+  passwordUserValidator,
 };

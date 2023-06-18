@@ -1,6 +1,6 @@
 const HTTP_ERROR_BAD_REQUEST = 400;
 
-const emailValidator = (req, res, next) => {
+const emailLoginValidator = (req, res, next) => {
   const { email } = req.body;
 
   if (!email) {
@@ -14,7 +14,7 @@ const emailValidator = (req, res, next) => {
   next();
 };
 
-const passwordValidator = (req, res, next) => {
+const passwordLoginValidator = (req, res, next) => {
   const { password } = req.body;
   
   if (!password) {
@@ -29,6 +29,6 @@ const passwordValidator = (req, res, next) => {
 };
 
 module.exports = {
-  emailValidator,
-  passwordValidator,
+  emailLoginValidator,
+  passwordLoginValidator,
 };
