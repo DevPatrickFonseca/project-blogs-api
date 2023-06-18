@@ -25,8 +25,21 @@ const createPostController = async (req, res) => {
   return res.status(type).json(data);
 };
 
+const updatePostController = async (req, res) => {
+  const { id } = req.params;
+  const { id: userId } = req.user;
+
+  const { title, content } = req.body;
+
+  const { type, data } = await postService
+    .putPost({ id, title, content, userId });
+
+  return res.status(type).json(data);
+};
+
 module.exports = {
   getPostController,
   getPostByIdController,
   createPostController,
+  updatePostController,
 };
