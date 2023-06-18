@@ -20,4 +20,6 @@ routers.put(
   postController.updatePostController,
 );
 
+routers.delete('/:id', tokenValidator, postController.deletePostController);
+
 module.exports = routers;
