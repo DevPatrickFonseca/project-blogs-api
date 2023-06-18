@@ -80,11 +80,30 @@ const putPost = async ({ id, title, content, userId }) => {
   return { type: 200, data: updatedPost };
 };
 
+const deletePost = async ({ id, userId }) => {
+  const postToBeDelete = await BlogPost.findByPk(id);
+
+  if (!postToBeDelete) {
+    return { type: 404, data: { message: 'Post does not exist' } };
+  }
+
+  if (postToBeDelete.userId !== userId) {
+    return { type: 401, data: { message: 'Unauthorized user' } };
+  }
+
+  await BlogPost.destroy({ where: { id } });
+  
+  const deletedPost = await BlogPost.findByPk(id);
+
+  return { type: 204, data: deletedPost };
+};
+
 module.exports = {
   getPosts,
   getPostById,
   postPost,
   putPost,
+  deletePost,
 };
 
 // Requirement completed with the help of Allex Thiago Santos Rosa
