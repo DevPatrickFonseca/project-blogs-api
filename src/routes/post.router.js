@@ -9,6 +9,7 @@ const { postValidator } = require('../middlewares');
 const { updateValidator } = require('../middlewares');
 
 routers.get('/', tokenValidator, postController.getPostController);
+routers.get('/search', tokenValidator, postController.searchPostController);
 routers.get('/:id', tokenValidator, postController.getPostByIdController);
 
 routers.post('/', tokenValidator, postValidator, postController.createPostController);
