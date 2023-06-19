@@ -47,10 +47,20 @@ const deletePostController = async (req, res) => {
   return res.status(type).json(data);
 };
 
+const searchPostController = async (req, res) => {
+  const { q: searchTerm } = req.query;
+
+  const { type, data } = await postService
+    .searchPost(searchTerm);
+
+  return res.status(type).json(data);
+};
+
 module.exports = {
   getPostController,
   getPostByIdController,
   createPostController,
   updatePostController,
   deletePostController,
+  searchPostController,
 };
